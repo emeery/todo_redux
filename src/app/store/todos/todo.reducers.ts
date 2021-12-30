@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Todo } from './models/todo.model';
+import { Todo } from '../../modules/todo/models/todo.model';
 import { ADD_TODO } from './todo.actions';
 
 export const initialState: Todo[] = [
