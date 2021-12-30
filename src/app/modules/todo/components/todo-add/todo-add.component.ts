@@ -15,7 +15,7 @@ export class TodoAddComponent implements OnInit {
     this.todoInput = new FormControl('', Validators.required);
   }
 
-  ngOnInit() {}
+  ngOnInit() {}  //
 
   onEnter() {
     if (this.todoInput.invalid) return;
