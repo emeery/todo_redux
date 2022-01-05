@@ -20,5 +20,6 @@ export class TodoAddComponent implements OnInit {
   onEnter() {
     if (this.todoInput.invalid) return;
     this.store.dispatch(actions.ADD_TODO({ task: this.todoInput.value }));
+    this.todoInput.reset();
   }
 }
