@@ -4,5 +4,11 @@
     <label (click)="onEdit()">{{ todo.task }}</label>
     <button class="destroy"></button>
   </div>
-  <input (blur)="onBlur()" #inputRef class="edit" type="text" [formControl]="task" />
+  <input
+    (blur)="onBlur()"
+    #inputRef
+    class="edit"
+    type="text"
+    [formControl]="task"
+  />
 </li>
