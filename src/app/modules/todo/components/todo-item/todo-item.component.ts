@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { throwIfEmpty } from 'rxjs';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Todo } from '../../models/todo.model';
 
 @Component({
@@ -10,6 +9,7 @@ import { Todo } from '../../models/todo.model';
 })
 export class TodoItemComponent implements OnInit {
   @Input() todo: Todo|any
+  @ViewChild('inputRef') inputRef: ElementRef
   task: FormControl
   completed: FormControl
   edit: boolean = false
@@ -27,7 +27,13 @@ export class TodoItemComponent implements OnInit {
 
   onEdit() {
     this.edit = true
-    console.log('hehe');
+    setTimeout(() => {
+      this.inputRef.nativeElement.select()
+    }, 1);
+  }
+
+  onBlur() {
+    this.edit = false;
   }
 }
 
