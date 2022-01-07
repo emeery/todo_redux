@@ -13,7 +13,7 @@ import { Todo } from '../../models/todo.model';
   styleUrls: ['./todo-item.component.css']
 })
 export class TodoItemComponent implements OnInit {
-  @Input() todo: Todo|any
+  @Input() todo: Todo| any
   @ViewChild('inputRef') inputRef: ElementRef
   task: FormControl
   completed: FormControl
@@ -21,13 +21,10 @@ export class TodoItemComponent implements OnInit {
 
   constructor(private store: Store<AppState>) { }
   ngOnInit(): void {
-    console.log(this.todo)
     this.setControls()
-    this.completed.valueChanges.subscribe((res) => {
-      console.log(this.todo.id)
+    this.completed.valueChanges.subscribe(() => {
       this.store.dispatch(actions.TOGGLE_COMPLETED({id: this.todo.id }))
     })
-
   }
 
   setControls() {
@@ -36,20 +33,19 @@ export class TodoItemComponent implements OnInit {
   }
 
   onEdit() {
-    console.log('onedit');
     this.edit = true
-    setTimeout(() => {
-      this.inputRef.nativeElement.select()
-    }, 1)
-
+    setTimeout(() => { this.inputRef.nativeElement.select()}, 1)
   }
 
   onBlur() {
-
-    if(this.task.invalid) {console.log('oyeme');}
+    if(this.task.invalid) this.task.setValue(this.task.value)
     if(this.task.value === this.todo.task) return
     this.store.dispatch(actions.UPDATE_TODO({id:this.todo.id, task:this.task.value}))
     this.edit = false
+  }
+
+  onDelete() {
+    this.store.dispatch(actions.DELETE_TODO({id:this.todo.id}))
   }
 }
 
