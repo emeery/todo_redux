@@ -23,7 +23,6 @@ export class TodoItemComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.todo)
     this.setControls()
-    console.log('jejej')
     this.completed.valueChanges.subscribe((res) => {
       console.log(this.todo.id)
       this.store.dispatch(actions.TOGGLE_COMPLETED({id: this.todo.id }))
@@ -37,14 +36,20 @@ export class TodoItemComponent implements OnInit {
   }
 
   onEdit() {
+    console.log('onedit');
     this.edit = true
     setTimeout(() => {
       this.inputRef.nativeElement.select()
-    }, 1);
+    }, 1)
+
   }
 
   onBlur() {
-    this.edit = false;
+
+    if(this.task.invalid) {console.log('oyeme');}
+    if(this.task.value === this.todo.task) return
+    this.store.dispatch(actions.UPDATE_TODO({id:this.todo.id, task:this.task.value}))
+    this.edit = false
   }
 }
 
